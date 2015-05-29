@@ -49,7 +49,7 @@ public class MenuScript : MonoBehaviour {
 	{
 		//Change this when we add play game, so that
 		//the game scene is loaded as one.
-		Application.LoadLevel (1);
+		Application.LoadLevel (2);
 	}
 
 

@@ -17,6 +17,7 @@ public class TextTimerScript : MonoBehaviour {
 	public int m_eight_transition;
 	public int m_ninth_transtion;
 	public int m_tenth_transition;
+	public int last_transition;
 	
 	// Use this for initialization
 	void Start () {
@@ -53,8 +54,10 @@ public class TextTimerScript : MonoBehaviour {
 			m_text_component.text = "";
 		} else if (m_timer == m_ninth_transtion) {
 			m_text_component.text = "Being hit by zombies lowers\n your health bar. Don't get hit!";
-		} else if (m_timer == m_tenth_transition){
+		} else if (m_timer == m_tenth_transition) {
 			m_text_component.text = "Walk over new weapons to\n Add them to your inventory! !";
+		} else if (m_timer == last_transition) {
+			Application.LoadLevel(0);
 		}
 		
 		

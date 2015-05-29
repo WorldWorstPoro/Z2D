@@ -1376,6 +1376,7 @@ MonoBehaviour:
   m_eight_transition: 1900
   m_ninth_transtion: 2000
   m_tenth_transition: 2350
+  last_transition: 2500
 --- !u!1 &1760346500
 GameObject:
   m_ObjectHideFlags: 0
