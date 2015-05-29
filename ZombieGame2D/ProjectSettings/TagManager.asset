@@ -8,6 +8,7 @@ TagManager:
   - Zombie
   - Bullet
   - Terrain
+  - Gun
   layers:
   - Default
   - TransparentFX

@@ -5,8 +5,8 @@ using System.Collections;
 public class GunImageScript : MonoBehaviour {
 	
 	private int m_timer = 0;
-	private Image m_gun_image;
 
+	public Image m_gun_image;
 	public Sprite m_pistol;
 	public Sprite m_shotgun;
 	public Sprite m_machineGun;

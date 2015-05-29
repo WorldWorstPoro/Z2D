@@ -60,24 +60,41 @@ public class TutorialPlayerAnimScript : MonoBehaviour {
 		
 		if (m_timer == 680) {
 			m_cur_state = CURRENT_STATE.RIGHT;
-			transform.Rotate(Vector3.forward * 90);
-			m_physics.velocity = new Vector2(m_run_speed, 0);
+			transform.Rotate (Vector3.forward * 90);
+			m_physics.velocity = new Vector2 (m_run_speed, 0);
 		}
 		
 		if (m_timer == 740) {
 			m_running = false;
-			m_physics.velocity = new Vector2(0,0);
+			m_physics.velocity = new Vector2 (0, 0);
 			m_animation.enabled = false;
 		}
+
 		if (m_running == false) {
 			Vector3 zombieloc = GameObject.Find ("Tutorial Zombie- Walking").transform.position;
 
 			//Determines angle
-			var angle = Mathf.Atan2(zombieloc.y - this.transform.position.y, zombieloc.x - this.transform.position.x) * Mathf.Rad2Deg;
+			var angle = Mathf.Atan2 (zombieloc.y - this.transform.position.y, zombieloc.x - this.transform.position.x) * Mathf.Rad2Deg;
 
 			//Angle - 90 has to be used because the player sprite is pointed upward
-			transform.rotation = Quaternion.Euler(new Vector3(0,0, angle - 90));
+			transform.rotation = Quaternion.Euler (new Vector3 (0, 0, angle - 90));
 		}
-		
+
+		if (m_timer == 2450) {
+			m_running = true;
+			m_animation.enabled = true;
+			transform.Rotate (Vector3.forward * 150);
+
+			m_physics.velocity = new Vector2 (m_run_speed, 0);
+				
+		}
 	}
+
+		void OnTriggerEnter2D (Collider2D col) 
+		{
+			if (col.tag == "Gun") {
+				m_physics.velocity = new Vector2(0,0);
+				m_animation.enabled = false;
+			}
+		}
 }
