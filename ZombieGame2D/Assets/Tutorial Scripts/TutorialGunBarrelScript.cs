@@ -9,23 +9,17 @@ public class TutorialGunBarrelScript : MonoBehaviour {
 	public Rigidbody2D m_bullet;		//Reference to the Prefab bullet					
 	
 	
-	private TutorialPlayerAnimScript m_player_anim_script;		
-	private Animator anim;					
-	
-	
+	private TutorialPlayerAnimScript m_player_anim_script;				
+
 	void Awake()
 	{
-		// Setting up the references.
-		//Reference to the game objects animation
-		anim = transform.root.gameObject.GetComponent<Animator>();
-
 		//Reference to the calling script so that we can use its timer variable
 		m_player_anim_script = transform.root.GetComponent<TutorialPlayerAnimScript>();
 	}
 
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		if (m_player_anim_script.m_timer == 1000 || m_player_anim_script.m_timer == 1050 || m_player_anim_script.m_timer == 1100 || m_player_anim_script.m_timer == 1350) {
 

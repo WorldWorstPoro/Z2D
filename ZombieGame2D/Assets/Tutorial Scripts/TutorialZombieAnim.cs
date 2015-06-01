@@ -13,8 +13,6 @@ public class TutorialZombieAnim : MonoBehaviour {
 
 	Animator m_animation;
 
-	private BoxCollider2D m_collider;
-
 	public MoneyTextScript money_text_script;
 	
 	// Use this for initialization
@@ -24,8 +22,6 @@ public class TutorialZombieAnim : MonoBehaviour {
 
 		m_animation = this.GetComponent<Animator> ();
 		m_animation.SetBool ("Walking", true);
-
-		m_collider = this.GetComponent<BoxCollider2D> ();
 	}
 	
 	// Update is called once per frame
