@@ -16,7 +16,7 @@ public class BulletBasicBehavior : MonoBehaviour {
 	//Destroys the bullet on collision with terrain or with a zombie
 	void OnTriggerEnter2D (Collider2D col) 
 	{
-		if (col.tag == "Zombie" || col.tag == "Terrain") {
+		if (col.tag == "Zombie" || col.tag == "Terrain" || col.tag == "Walls") {
 
 			//Destroy the bullet
 			Destroy(gameObject);
