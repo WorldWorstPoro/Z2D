@@ -311,7 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1311360eec1f8e345bb4e46819f74f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HealthBar: {fileID: 0}
   ExitBtn: {fileID: 477966376}
+  MoneyText: {fileID: 0}
+  GunImage: {fileID: 0}
+  MoneyImage: {fileID: 0}
+  Health: 1
 --- !u!1 &339224179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1807,7 +1812,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2128759050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf1f83c453198bf4990060c22e070fe9, type: 3}
+  m_Script: {fileID: 11500000, guid: 73eb14b8e49c6d34cb03a55ed7504a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2128759053

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerControlScript : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PlayerControlScript : MonoBehaviour {
 	public float max_speed;
 
 	private int m_cur_motion;
+	private int health = 100;
 
 	// Use this for initialization
 	void Start () {
@@ -163,6 +165,21 @@ public class PlayerControlScript : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void OnCollisionEnter2D(Collision2D col){
+			
+			if (col.collider.tag == "Zombie") {
+				GameObject gis = GameObject.Find ("Canvas");
+				gis.GetComponent<HUDScript> ().HealthBar.value = gis.GetComponent<HUDScript> ().HealthBar.value - .1F;
+				health -= 10;	
+		
+				if (health == 0){
+					GameObject ply = GameObject.Find("Player");
+					ply.SetActive(false);
+				gis.GetComponent<HUDScript>().TimerText.GetComponent<TimeTextBehavior>().m_enabled = false;
+				}
+			}
 
 	}
 }
