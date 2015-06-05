@@ -11,6 +11,7 @@ public class PlayerControlScript : MonoBehaviour {
 
 	private int m_cur_motion;
 	private int health = 100;
+	private int regen = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -119,6 +120,18 @@ public class PlayerControlScript : MonoBehaviour {
 	// FixedUpdate is called once per physics step
 	void FixedUpdate () {
 
+		regen++;
+
+		if ((regen % 100 == 0) && (health < 100)) {
+			regen = 0;
+			health++;
+
+			GameObject gis = GameObject.Find ("Canvas");
+			gis.GetComponent<HUDScript> ().HealthBar.value = gis.GetComponent<HUDScript> ().HealthBar.value + .01F;
+
+		}
+
+
 		if (m_animator != null) {
 
 			int horizontal_axis = 0;
@@ -174,10 +187,11 @@ public class PlayerControlScript : MonoBehaviour {
 				gis.GetComponent<HUDScript> ().HealthBar.value = gis.GetComponent<HUDScript> ().HealthBar.value - .1F;
 				health -= 10;	
 		
-				if (health == 0){
+				if (health <= 0){
 					GameObject ply = GameObject.Find("Player");
 					ply.SetActive(false);
-				gis.GetComponent<HUDScript>().TimerText.GetComponent<TimeTextBehavior>().m_enabled = false;
+					gis.GetComponent<HUDScript>().TimerText.GetComponent<TimeTextBehavior>().m_enabled = false;
+					gis.GetComponent<HUDScript>().EndText.GetComponent<GameOverScript>().dead = true;
 				}
 			}
 
