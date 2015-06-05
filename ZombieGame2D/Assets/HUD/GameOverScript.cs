@@ -17,7 +17,7 @@ public class GameOverScript : MonoBehaviour {
 			GameObject timer = GameObject.Find("Timer");
 			GameObject money = GameObject.Find("MoneyText");
 			m_text_component.text = "Game Over!\nYou survived for: " + timer.GetComponent<Text>().text + 
-				"\nAnd earned: $:" + money.GetComponent<Text>().text;
+				"\nAnd earned: $" + money.GetComponent<Text>().text;
 
 		}
 	}
