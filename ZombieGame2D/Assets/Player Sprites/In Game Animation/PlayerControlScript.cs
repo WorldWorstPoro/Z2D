@@ -194,6 +194,15 @@ public class PlayerControlScript : MonoBehaviour {
 					gis.GetComponent<HUDScript>().EndText.GetComponent<GameOverScript>().dead = true;
 				}
 			}
-
+			else if (col.collider.tag == "Gun") {
+				Debug.Log("did i collide?");
+				GameObject gun = GameObject.Find ("GunBarrel");
+				if (col.gameObject.name == "Shotgun")
+					gun.GetComponent<ShootBulletsScript>().AddGun(2);
+				else if (col.gameObject.name == "Machinegun")
+					gun.GetComponent<ShootBulletsScript>().AddGun(1);
+				
+				Destroy(col.gameObject);
+			}
 	}
 }

@@ -16,10 +16,11 @@ public class ShootBulletsScript : MonoBehaviour {
 	private int cur_bullets;
 	public int max_bullets;
 
-	private IList<int> gunlist;
+	private List<int> gunlist;
 
 	// Use this for initialization
 	void Start (){
+		gunlist = new List<int> ();
 		cur_bullets = 0;
 		gunlist.Add (cur_gun);
 	}
@@ -117,6 +118,31 @@ public class ShootBulletsScript : MonoBehaviour {
 					cur_gun = gunlist[0]; 
 				else
 					cur_gun = gunlist[gunlist.IndexOf(cur_gun) + 1];     
+			
+				if ( cur_gun == 0 )
+				{
+					fireRate = 0.3F;
+					reloadDelay = 0.4F;
+					max_bullets = 6;
+					cur_bullets = 6;
+					nextFire = Time.time + reloadDelay;
+				}
+				else if ( cur_gun == 1)
+				{
+					fireRate = 0.7F;
+					reloadDelay = 0.8F;
+					max_bullets = 20;
+					cur_bullets = 20;
+					nextFire = Time.time + reloadDelay;
+				}
+				else if ( cur_gun == 2)
+				{
+					fireRate = 0.1F;
+					reloadDelay = 1.5F;
+					max_bullets = 20;
+					cur_bullets	= 20;
+					nextFire = Time.time + reloadDelay;
+				}
 			}
 		}
 	}
