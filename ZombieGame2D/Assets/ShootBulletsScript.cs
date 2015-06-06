@@ -74,16 +74,32 @@ public class ShootBulletsScript : MonoBehaviour {
 				cur_bullets = max_bullets;
 			}
 		}
-		if (Input.GetKey (KeyCode.R)) {
+		if (Input.GetKeyDown (KeyCode.R)) {
 			nextFire = Time.time + reloadDelay;
 		}
-		if (Input.GetKey (KeyCode.Q)) {
+		if (Input.GetKeyDown (KeyCode.Q)) {
 			if(gunlist.Count > 1)
 			{
+				Debug.Log ("current list before switch");
+				Debug.Log (gunlist[0]);
+				Debug.Log (gunlist[1]);
+
+				Debug.Log("current gun before switch");
+				Debug.Log (cur_gun);
+
 				if ( cur_gun == gunlist[0] )
+				{
 					cur_gun = gunlist[gunlist.Count - 1];
+					Debug.Log("cur_gun == gunlist[0] is true");
+				}
 				else
+				{
 					cur_gun = gunlist[gunlist.IndexOf(cur_gun) - 1];
+					Debug.Log("cur_gun == gunlist[0] is false");
+				}
+
+				Debug.Log("current gun after switch");
+				Debug.Log (cur_gun);
 
 				if ( cur_gun == 0 )
 				{
@@ -91,7 +107,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 0.4F;
 					max_bullets = 6;
 					cur_bullets = 6;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 				else if ( cur_gun == 1)
 				{
@@ -99,7 +115,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 0.8F;
 					max_bullets = 20;
 					cur_bullets = 20;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 				else if ( cur_gun == 2)
 				{
@@ -107,11 +123,11 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 1.5F;
 					max_bullets = 20;
 					cur_bullets	= 20;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 			}
 		}
-		if (Input.GetKey (KeyCode.E)) {
+		if (Input.GetKeyDown (KeyCode.E)) {
 			if(gunlist.Count > 1)
 			{
 				if ( cur_gun == gunlist[gunlist.Count - 1] )
@@ -125,7 +141,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 0.4F;
 					max_bullets = 6;
 					cur_bullets = 6;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 				else if ( cur_gun == 1)
 				{
@@ -133,7 +149,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 0.8F;
 					max_bullets = 20;
 					cur_bullets = 20;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 				else if ( cur_gun == 2)
 				{
@@ -141,7 +157,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					reloadDelay = 1.5F;
 					max_bullets = 20;
 					cur_bullets	= 20;
-					nextFire = Time.time + reloadDelay;
+					//nextFire = Time.time + reloadDelay;
 				}
 			}
 		}
