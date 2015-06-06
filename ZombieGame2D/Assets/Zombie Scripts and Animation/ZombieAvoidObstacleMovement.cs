@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class ZombieAvoidObstacleMovement : MonoBehaviour {
 
 	private Rigidbody2D m_physics;
 	public int avoid_layer;
 	public float max_speed;
+
+	private WayPointHandler m_waypoint_handle;
 
 	private GameObject player;
 
@@ -16,6 +17,8 @@ public class ZombieAvoidObstacleMovement : MonoBehaviour {
 		player  = GameObject.Find ("Player");
 
 		m_physics.velocity = new Vector2 (player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).normalized * max_speed;
+
+		m_waypoint_handle = GameObject.Find ("WayPoints").GetComponent<WayPointHandler> ();
 	}
 	
 	// Update is called once per frame
@@ -52,7 +55,8 @@ public class ZombieAvoidObstacleMovement : MonoBehaviour {
 
 			//If there is an object in the set layer between the zombie and the player, move at an angle from it.
 			if (hit.collider != null ) {
-				//Wall is in the way. Handle it here.
+				dir_to_player = (Vector2)m_waypoint_handle.GetNextWayPointLocation(transform.position) - (Vector2)transform.position;
+				m_physics.velocity = dir_to_player.normalized * max_speed;
 			} 
 			//Otherwise just keep moving towards the player
 			else {
