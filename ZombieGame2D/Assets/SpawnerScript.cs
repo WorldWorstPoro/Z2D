@@ -23,7 +23,7 @@ public class SpawnerScript : MonoBehaviour {
 		if (spawning == 100 && GameObject.Find ("Canvas").GetComponent<HUDScript>().EndText.GetComponent<GameOverScript>().dead != true) {
 			spawning = 0;
 
-			int rand = Random.Range(0,3);
+			int rand = Random.Range(0,4);
 
 			switch(rand)
 			{
@@ -38,6 +38,8 @@ public class SpawnerScript : MonoBehaviour {
 				break;
 			case 3:
 				Rigidbody2D zombie_instanceSE = Instantiate (m_zombie, SpawnerSE.transform.position, Quaternion.Euler (new Vector3 (0, 0, 0))) as Rigidbody2D;
+				break;
+			default:
 				break;
 			}
 		}

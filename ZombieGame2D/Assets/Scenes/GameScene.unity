@@ -1034,7 +1034,7 @@ GameObject:
   - 222: {fileID: 243842291}
   - 114: {fileID: 243842290}
   m_Layer: 5
-  m_Name: GunImage
+  m_Name: GameGunImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2960,6 +2960,9 @@ MonoBehaviour:
   fireRate: 1
   reloadDelay: 0
   cur_gun: 0
+  m_pistol: {fileID: 21300024, guid: a7c58e0a961f4ee41adac0133a7c150c, type: 3}
+  m_shotgun: {fileID: 21300026, guid: a7c58e0a961f4ee41adac0133a7c150c, type: 3}
+  m_machinegun: {fileID: 21300020, guid: a7c58e0a961f4ee41adac0133a7c150c, type: 3}
   max_bullets: 6
 --- !u!1 &734423592
 GameObject:

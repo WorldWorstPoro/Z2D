@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ShootBulletsScript : MonoBehaviour {
 
@@ -12,6 +13,10 @@ public class ShootBulletsScript : MonoBehaviour {
 	public float reloadDelay;
 	public int cur_gun;
 	private float nextFire = 0.0F;
+
+	public Sprite m_pistol;
+	public Sprite m_shotgun;
+	public Sprite m_machinegun;
 
 	private int cur_bullets;
 	public int max_bullets;
@@ -30,7 +35,6 @@ public class ShootBulletsScript : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0) && Time.time > nextFire) {
 			if ( cur_bullets > 0 )
 			{
-				cur_bullets--;
 				nextFire = Time.time + fireRate;
 				Vector3 mouse_pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Vector2 unit_direction = new Vector2 ((mouse_pos.x - this.transform.position.x), (mouse_pos.y - this.transform.position.y));
@@ -42,6 +46,7 @@ public class ShootBulletsScript : MonoBehaviour {
 				{
 					Rigidbody2D bullet_instance = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;
 					bullet_instance.velocity = (unit_direction * max_speed);
+					cur_bullets--;
 				}
 				else
 				{
@@ -66,6 +71,9 @@ public class ShootBulletsScript : MonoBehaviour {
 					bullet_instance3.velocity = (unit_direction3 * max_speed);
 					bullet_instance4.velocity = (unit_direction4 * max_speed);
 					bullet_instance5.velocity = (unit_direction5 * max_speed);
+
+					
+					cur_bullets -= 5;
 				}
 			}
 			else if ( cur_bullets <= 0 )
@@ -89,30 +97,7 @@ public class ShootBulletsScript : MonoBehaviour {
 					cur_gun = gunlist[gunlist.IndexOf(cur_gun) - 1];
 				}
 
-				if ( cur_gun == 0 )
-				{
-					fireRate = 0.3F;
-					reloadDelay = 0.4F;
-					max_bullets = 6;
-					cur_bullets = 6;
-					nextFire = Time.time + reloadDelay;
-				}
-				else if ( cur_gun == 1)
-				{
-					fireRate = 0.7F;
-					reloadDelay = 0.8F;
-					max_bullets = 20;
-					cur_bullets = 20;
-					nextFire = Time.time + reloadDelay;
-				}
-				else if ( cur_gun == 2)
-				{
-					fireRate = 0.1F;
-					reloadDelay = 1.5F;
-					max_bullets = 20;
-					cur_bullets	= 20;
-					nextFire = Time.time + reloadDelay;
-				}
+				CurrentGunSelect();
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.E)) {
@@ -123,36 +108,46 @@ public class ShootBulletsScript : MonoBehaviour {
 				else
 					cur_gun = gunlist[gunlist.IndexOf(cur_gun) + 1];     
 			
-				if ( cur_gun == 0 )
-				{
-					fireRate = 0.3F;
-					reloadDelay = 0.4F;
-					max_bullets = 6;
-					cur_bullets = 6;
-					nextFire = Time.time + reloadDelay;
-				}
-				else if ( cur_gun == 1)
-				{
-					fireRate = 0.7F;
-					reloadDelay = 0.8F;
-					max_bullets = 20;
-					cur_bullets = 20;
-					nextFire = Time.time + reloadDelay;
-				}
-				else if ( cur_gun == 2)
-				{
-					fireRate = 0.1F;
-					reloadDelay = 1.5F;
-					max_bullets = 20;
-					cur_bullets	= 20;
-					nextFire = Time.time + reloadDelay;
-				}
+				CurrentGunSelect();
 			}
 		}
 	}
 	public void AddGun (int i)
 	{
 		gunlist.Add (i);
+	}
+
+	public void CurrentGunSelect()
+	{
+		GameObject gun_img = GameObject.Find("GameGunImage");
+		
+		if ( cur_gun == 0 )
+		{
+			gun_img.GetComponent<Image>().sprite = m_pistol;
+			fireRate = 0.3F;
+			reloadDelay = 0.4F;
+			max_bullets = 6;
+			cur_bullets = 6;
+			nextFire = Time.time + reloadDelay;
+		}
+		else if ( cur_gun == 1)
+		{
+			gun_img.GetComponent<Image>().sprite = m_machinegun;
+			fireRate = 0.1F;
+			reloadDelay = 0.8F;
+			max_bullets = 20;
+			cur_bullets = 20;
+			nextFire = Time.time + reloadDelay;
+		}
+		else if ( cur_gun == 2)
+		{
+			gun_img.GetComponent<Image>().sprite = m_shotgun;
+			fireRate = 0.7F;
+			reloadDelay = 1.5F;
+			max_bullets = 20;
+			cur_bullets	= 20;
+			nextFire = Time.time + reloadDelay;
+		}
 	}
 
 }
