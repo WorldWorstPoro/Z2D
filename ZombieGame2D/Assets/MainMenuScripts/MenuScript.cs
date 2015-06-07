@@ -47,10 +47,6 @@ public class MenuScript : MonoBehaviour {
 
 	public void PlayTutorial()
 	{
-		//Change this when we add play game, so that
-		//the game scene is loaded as one.
 		Application.LoadLevel (2);
 	}
-
-
 }

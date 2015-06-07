@@ -183,26 +183,50 @@ public class PlayerControlScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D col){
 			
 			if (col.collider.tag == "Zombie") {
-				GameObject gis = GameObject.Find ("Canvas");
-				gis.GetComponent<HUDScript> ().HealthBar.value = gis.GetComponent<HUDScript> ().HealthBar.value - .1F;
-				health -= 10;	
+			GameObject gis = GameObject.Find ("Canvas");
+			gis.GetComponent<HUDScript> ().HealthBar.value = gis.GetComponent<HUDScript> ().HealthBar.value - .1F;
+			health -= 10;	
 		
-				if (health <= 0){
-					GameObject ply = GameObject.Find("Player");
-					ply.SetActive(false);
-					gis.GetComponent<HUDScript>().TimerText.GetComponent<TimeTextBehavior>().m_enabled = false;
-					gis.GetComponent<HUDScript>().EndText.GetComponent<GameOverScript>().dead = true;
+			if (health <= 0) {
+				GameObject ply = GameObject.Find ("Player");
+				ply.SetActive (false);
+				gis.GetComponent<HUDScript> ().TimerText.GetComponent<TimeTextBehavior> ().m_enabled = false;
+				gis.GetComponent<HUDScript> ().EndText.GetComponent<GameOverScript> ().dead = true;
+			}
+		} else if (col.collider.tag == "Gun") {
+			//TO DO: replace arbitrary gun prices with gun price in UI
+			//		 Destroy gun price object from the UI
+			GameObject gun = GameObject.Find ("GunBarrel");
+			GameObject canvas = GameObject.Find ("Canvas");
+			string smoney = canvas.GetComponent<HUDScript> ().MoneyText.text;
+			int imoney = int.Parse (smoney);
+
+			bool enoughMoney = false;
+				
+			if (col.gameObject.name == "Shotgun") {
+				int sPrice = int.Parse (GameObject.Find ("Z2Dcost2").GetComponent<Text>().text);
+				if (imoney >= sPrice)
+				{
+					gun.GetComponent<ShootBulletsScript> ().AddGun (2);
+					imoney -= sPrice;
+					enoughMoney = true;
+					Destroy (GameObject.Find ("Z2Dcost2"));
+				}
+			} else if (col.gameObject.name == "Machinegun") {
+				int mPrice = int.Parse (GameObject.Find ("Z2Dcost1").GetComponent<Text>().text);
+				if(imoney >= mPrice)
+				{
+					gun.GetComponent<ShootBulletsScript> ().AddGun (1);
+					imoney -= mPrice;	
+					enoughMoney = true;
+					Destroy (GameObject.Find ("Z2Dcost1"));
 				}
 			}
-			else if (col.collider.tag == "Gun") {
-				Debug.Log("did i collide?");
-				GameObject gun = GameObject.Find ("GunBarrel");
-				if (col.gameObject.name == "Shotgun")
-					gun.GetComponent<ShootBulletsScript>().AddGun(2);
-				else if (col.gameObject.name == "Machinegun")
-					gun.GetComponent<ShootBulletsScript>().AddGun(1);
-				
-				Destroy(col.gameObject);
+			if (enoughMoney) {
+				smoney = imoney.ToString ();
+				canvas.GetComponent<HUDScript> ().MoneyText.text = smoney;
+				Destroy (col.gameObject);
 			}
+		}
 	}
 }

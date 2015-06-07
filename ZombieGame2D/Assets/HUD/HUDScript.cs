@@ -22,7 +22,6 @@ public class HUDScript : MonoBehaviour {
 	void Update () {
 	
 	}
-
 	
 	public void ExitPress()
 	{
