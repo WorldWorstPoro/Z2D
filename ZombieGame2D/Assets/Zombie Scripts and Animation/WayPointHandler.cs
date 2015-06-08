@@ -83,34 +83,7 @@ public class WayPointHandler : MonoBehaviour {
 		Array.Sort(foundObs, new AlphanumComparatorFast().Compare);
 		return foundObs;
 	}
-
-
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.M)) {
-			for (int i = 0; i < waypoints.Length; ++i){
-				for (int j = 0; j <waypoints.Length; ++j){
-					Debug.Log("Node " + i.ToString() + " to " + j.ToString() + " distance " + waypoints[i].GetComponent<WayPointScript>().GetDistanceToIndex(j).ToString() );
-				}
-			}
-		}
-
-		if (Input.GetKeyDown (KeyCode.N)) {
-			Debug.Log("Player " + GetIndexOfNearestWayPoint(player.transform.position));
-		}
-
-		if (Input.GetKeyDown (KeyCode.B)) {
-			foreach(Path path in m_paths){
-				String log_string = "";
-
-				foreach (int index in path.GetPathList()){
-					log_string = log_string + " " + index.ToString();
-				}
-
-				Debug.Log(log_string);
-			}
-		}
-	}
+	
 
 	void FixedUpdate(){
 		//Removed as it does not impact performance greatly
