@@ -48,7 +48,7 @@ public class ZombieAvoidObstacleMovement : MonoBehaviour {
 
 		//If the distance to the player is far enough, try to find a path to him
 		//This distance is approximately where the zombie makes contact with the player
-		if (min_distance_check > 1) {
+		if (min_distance_check > .5) {
 
 			hit = Physics2D.Raycast(transform.position, dir_to_player, max_distance, layer_mask);
 
@@ -62,8 +62,6 @@ public class ZombieAvoidObstacleMovement : MonoBehaviour {
 			else {
 				m_physics.velocity = dir_to_player * max_speed;
 			}
-		} else {
-			//Start attack animation?
-		}
+		} 
 	}
 }

@@ -25,6 +25,11 @@ public class ShootBulletsScript : MonoBehaviour {
 
 	private GameObject m_player;
 
+	public AudioClip m_gunfire;
+	public AudioClip m_shotgunfire;
+
+	private AudioSource m_audio_source;
+
 	// Use this for initialization
 	void Start (){
 		gunlist = new List<int> ();
@@ -32,6 +37,8 @@ public class ShootBulletsScript : MonoBehaviour {
 		gunlist.Add (cur_gun);
 
 		m_player = GameObject.Find ("Player");
+		m_audio_source = this.GetComponent<AudioSource> ();
+		m_audio_source.volume = .3F;
 	}
 	
 	// Update is called once per frame
@@ -49,8 +56,15 @@ public class ShootBulletsScript : MonoBehaviour {
 				if (cur_gun != 2) {
 					Rigidbody2D bullet_instance = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;
 					bullet_instance.velocity = (unit_direction * max_speed);
+
+					m_audio_source.volume = .3F;
+					m_audio_source.PlayOneShot(m_gunfire);
+
 					cur_bullets--;
 				} else {
+					m_audio_source.volume = .6F;
+					m_audio_source.PlayOneShot(m_shotgunfire);
+
 					Rigidbody2D bullet_instance1 = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;
 					Rigidbody2D bullet_instance2 = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;
 					Rigidbody2D bullet_instance3 = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;

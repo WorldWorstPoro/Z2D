@@ -189,9 +189,9 @@ public class PlayerControlScript : MonoBehaviour {
 		
 			if (health <= 0) {
 				GameObject ply = GameObject.Find ("Player");
-				ply.SetActive (false);
+				gis.GetComponent<HUDScript> ().EndText.GetComponent<GameOverScript> ().PlayerDied();
 				gis.GetComponent<HUDScript> ().TimerText.GetComponent<TimeTextBehavior> ().m_enabled = false;
-				gis.GetComponent<HUDScript> ().EndText.GetComponent<GameOverScript> ().dead = true;
+				ply.SetActive (false);
 			}
 		} else if (col.collider.tag == "Gun") {
 			//TO DO: replace arbitrary gun prices with gun price in UI
