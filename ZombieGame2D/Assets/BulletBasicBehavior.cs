@@ -27,14 +27,17 @@ public class BulletBasicBehavior : MonoBehaviour {
 		if (col.tag == "Zombie") {
 			Destroy(col.gameObject);
 			Destroy(gameObject);
+
+			//Ignore this portion if the tutorial is the current level
+			if (Application.loadedLevel != 2){
+				GameObject gis = GameObject.Find("Canvas");
+
+				score = int.Parse(gis.GetComponent<HUDScript>().MoneyText.GetComponent<Text>().text);
 			
-			GameObject gis = GameObject.Find("Canvas");
+				score += 100;
 
-			score = int.Parse(gis.GetComponent<HUDScript>().MoneyText.GetComponent<Text>().text);
-
-			score += 100;
-
-			gis.GetComponent<HUDScript>().MoneyText.GetComponent<Text>().text = score.ToString();
+				gis.GetComponent<HUDScript>().MoneyText.GetComponent<Text>().text = score.ToString();
+			}
 		}
 	}
 }

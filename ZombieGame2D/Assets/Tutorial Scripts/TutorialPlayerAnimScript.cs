@@ -21,6 +21,7 @@ public class TutorialPlayerAnimScript : MonoBehaviour {
 		m_physics = this.GetComponent<Rigidbody2D>();
 		m_physics.velocity = new Vector2 (-m_run_speed, 0);
 		m_animation = this.GetComponent<Animator> ();
+		m_animation.SetBool("Standing", false);
 	}
 	
 	// Update is called once per frame
@@ -70,9 +71,9 @@ public class TutorialPlayerAnimScript : MonoBehaviour {
 			m_animation.enabled = false;
 		}
 
-		if (m_running == false) {
+		if (m_running == false && m_timer < 1300) {
 			Vector3 zombieloc = GameObject.Find ("Tutorial Zombie- Walking").transform.position;
-
+			m_animation.SetBool("Standing", true);
 			//Determines angle
 			var angle = Mathf.Atan2 (zombieloc.y - this.transform.position.y, zombieloc.x - this.transform.position.x) * Mathf.Rad2Deg;
 
@@ -80,13 +81,13 @@ public class TutorialPlayerAnimScript : MonoBehaviour {
 			transform.rotation = Quaternion.Euler (new Vector3 (0, 0, angle - 90));
 		}
 
-		if (m_timer == 2450) {
+		if (m_timer == 2850) {
 			m_running = true;
 			m_animation.enabled = true;
 			transform.Rotate (Vector3.forward * 150);
 
 			m_physics.velocity = new Vector2 (m_run_speed, 0);
-				
+			m_animation.SetBool("Standing", false);
 		}
 	}
 
@@ -95,6 +96,7 @@ public class TutorialPlayerAnimScript : MonoBehaviour {
 			if (col.tag == "Gun") {
 				m_physics.velocity = new Vector2(0,0);
 				m_animation.enabled = false;
+				m_animation.SetBool("Standing", true);
 			}
 		}
 }

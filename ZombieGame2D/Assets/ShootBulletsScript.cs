@@ -23,11 +23,15 @@ public class ShootBulletsScript : MonoBehaviour {
 
 	private List<int> gunlist;
 
+	private GameObject m_player;
+
 	// Use this for initialization
 	void Start (){
 		gunlist = new List<int> ();
 		cur_bullets = 0;
 		gunlist.Add (cur_gun);
+
+		m_player = GameObject.Find ("Player");
 	}
 	
 	// Update is called once per frame
@@ -37,10 +41,10 @@ public class ShootBulletsScript : MonoBehaviour {
 			{
 				nextFire = Time.time + fireRate;
 				Vector3 mouse_pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				Vector2 unit_direction = new Vector2 ((mouse_pos.x - this.transform.position.x), (mouse_pos.y - this.transform.position.y));
+				Vector2 unit_direction = new Vector2 ((mouse_pos.x - m_player.transform.position.x), (mouse_pos.y - m_player.transform.position.y));
 				unit_direction.Normalize ();
 				//Determines angle
-				float angle = Mathf.Atan2 (mouse_pos.y - this.transform.position.y, mouse_pos.x - this.transform.position.x) * Mathf.Rad2Deg;
+				float angle = Mathf.Atan2 (mouse_pos.y - m_player.transform.position.y, mouse_pos.x - m_player.transform.position.x) * Mathf.Rad2Deg;
 
 				if (cur_gun != 2) {
 					Rigidbody2D bullet_instance = Instantiate (m_bullet, transform.position, Quaternion.Euler (new Vector3 (0, 0, angle - 90))) as Rigidbody2D;

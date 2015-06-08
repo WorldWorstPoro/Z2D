@@ -19,10 +19,10 @@ public class ShotgunSpriteScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		m_timer++;
 
-		if (m_timer == 2650) {
+		if (m_timer == 2600) {
 			m_col.enabled = true;
 			m_image.enabled = true;
 		}
